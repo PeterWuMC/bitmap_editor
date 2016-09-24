@@ -23,6 +23,12 @@ class Bitmap
     end
   end
 
+  def draw_horizontal_line(y, starting_x, ending_x, value)
+    (starting_x..ending_x).each do |x|
+      draw_pixel(x, y, value)
+    end
+  end
+
   def reset
     @matrix = Array.new(height) { Array.new(width) {0} }
   end

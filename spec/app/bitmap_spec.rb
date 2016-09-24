@@ -46,6 +46,20 @@ X 0 0
     end
   end
 
+  describe '#draw_horizontal_line' do
+    it 'update one pixel in the bitmap with a provided value' do
+      described_instance.draw_horizontal_line(4, 1, 2, 'X')
+
+      expect(described_instance.to_s).to eq """
+0 0 0
+0 0 0
+0 0 0
+X X 0
+0 0 0
+""".strip
+    end
+  end
+
   describe '#reset' do
     it 'resets the current bitmap to completely filled with 0 (White)' do
       described_instance.draw_pixel(1, 2, 'X')
