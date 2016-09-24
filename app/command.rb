@@ -10,6 +10,8 @@ module Command
     command_initial = command_string[0]
     command_mapping = COMMANDS_MAPPING[command_initial]
 
+    return true if print_help(command_initial)
+
     if command_mapping.nil?
       puts "Unknown Command '#{command_initial}'"
       return false
@@ -23,6 +25,16 @@ module Command
     end
 
     bitmap_editor.send(command_mapping['method'], *command_arguments(command_string, command_regex))
+    true
+  end
+
+  def print_help(command_initial)
+    if command_initial == '?'
+      COMMANDS_MAPPING.each do |_, command_info|
+        puts command_info['description']
+      end
+      return true
+    end
   end
 
   def command_arguments(command_string, command_regex)
