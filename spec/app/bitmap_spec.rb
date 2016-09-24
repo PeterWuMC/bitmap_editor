@@ -24,4 +24,23 @@ describe Bitmap do
 """.strip
     end
   end
+
+  describe '#set_pixel' do
+    it 'update one pixel in the bitmap with a provided value' do
+      described_instance.set_pixel(3, 2, 'C')
+
+      expect(subject).to eq """
+0 0 0 0 0
+0 0 C 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+""".strip
+    end
+  end
 end
