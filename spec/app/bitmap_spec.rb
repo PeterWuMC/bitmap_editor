@@ -1,7 +1,6 @@
 require 'bitmap'
 
 describe Bitmap do
-
   let(:width)              { 3 }
   let(:height)             { 5 }
   let(:described_instance) { described_class.new(width, height) }
@@ -65,34 +64,6 @@ describe Bitmap do
 X 0 0
 0 0 0
 0 0 0
-0 0 0
-""".strip
-    end
-  end
-
-  describe '#draw_vertical_line' do
-    it 'update one pixel in the bitmap with a provided value' do
-      described_instance.draw_vertical_line(2, 2, 5, 'X')
-
-      expect(described_instance.to_s).to eq """
-0 0 0
-0 X 0
-0 X 0
-0 X 0
-0 X 0
-""".strip
-    end
-  end
-
-  describe '#draw_horizontal_line' do
-    it 'update one pixel in the bitmap with a provided value' do
-      described_instance.draw_horizontal_line(4, 1, 2, 'X')
-
-      expect(described_instance.to_s).to eq """
-0 0 0
-0 0 0
-0 0 0
-X X 0
 0 0 0
 """.strip
     end
