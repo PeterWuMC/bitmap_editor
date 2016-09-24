@@ -7,18 +7,6 @@ describe Command do
 
   describe '.execute' do
     let(:bitmap_editor) { BitmapEditor.new }
-    let(:method)        { :new_bitmap }
-    let(:regex)         { /^[a-zA-Z]\s([0-9]+)\s([0-9]+)$/ }
-    let(:dummy_commands_mapping) do
-      {
-        'I' => {
-          'regex'  => regex,
-          'method' => method
-        }
-      }
-    end
-
-    subject { described_class.execute(command_string, bitmap_editor) }
 
     shared_examples :arguments_incorrect_error do
       it 'does not call the method in bitmap' do
@@ -27,9 +15,24 @@ describe Command do
       end
 
       it 'prints the error message' do
-        expect { subject }.to output("Not enough information to execute the command I: (?-mix:^[a-zA-Z]\\s([0-9]+)\\s([0-9]+)$)\n").to_stdout
+        expect { subject }.to output("Not enough information to execute the command I: (?-mix:^I\\s([0-9]+)\\s([0-9]+)$)\n").to_stdout
       end
     end
+
+    let(:method)      { :new_bitmap }
+    let(:regex)       { /^I\s([0-9]+)\s([0-9]+)$/ }
+    let(:description) { 'hello world'}
+    let(:dummy_commands_mapping) do
+      {
+        'I' => {
+          'regex'       => regex,
+          'method'      => method,
+          'description' => description
+        }
+      }
+    end
+
+    subject { described_class.execute(command_string, bitmap_editor) }
 
     context 'when the command is not found' do
         let(:command_string) { 'Z' }
@@ -58,6 +61,22 @@ describe Command do
       context 'and there are missing arguments' do
         let(:command_string) { 'I 10' }
         it_behaves_like :arguments_incorrect_error
+      end
+    end
+
+    context 'command without argument' do
+      let(:method) { :display_bitmap }
+      let(:regex)  { /^I$/ }
+
+      it 'calls the method in bitmap with the matching regex' do
+        expect(bitmap_editor).to receive(method)
+        described_class.execute('I', bitmap_editor)
+      end
+    end
+
+    context 'when the command is "?"' do
+      it 'prints all the descriptions in the commands_mapping' do
+        expect { described_class.execute('?', bitmap_editor) }.to output("hello world\n").to_stdout
       end
     end
   end

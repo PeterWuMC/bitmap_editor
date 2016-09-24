@@ -10,7 +10,7 @@ module Command
     command_initial = command_string[0]
     command_mapping = COMMANDS_MAPPING[command_initial]
 
-    return true if print_help(command_initial)
+    return if print_help(command_initial)
 
     if command_mapping.nil?
       puts "Unknown Command '#{command_initial}'"
@@ -23,9 +23,8 @@ module Command
       puts "Not enough information to execute the command #{command_initial}: #{command_regex}"
       return false
     end
-
-    bitmap_editor.send(command_mapping['method'], *command_arguments(command_string, command_regex))
-    true
+    send_command = [command_mapping['method']] + command_arguments(command_string, command_regex)
+    bitmap_editor.send(*send_command)
   end
 
   def print_help(command_initial)
@@ -38,7 +37,8 @@ module Command
   end
 
   def command_arguments(command_string, command_regex)
-    command_string.scan(command_regex).flatten
+    matches = command_string.scan(command_regex)
+    matches.first.is_a?(Array) ? matches.flatten : []
   end
 
   def matches_regex?(command_string, command_regex)

@@ -6,7 +6,9 @@ class BitmapEditor
   end
 
   def draw_vertical_line(x, starting_y, ending_y, value)
-    return unless validate_pixels_out_of_range(x, x, starting_y, ending_y)
+    x, starting_y, ending_y = x.to_i, starting_y.to_i, ending_y.to_i
+    return false unless bitmap
+    return false unless validate_pixels_out_of_range(x, x, starting_y, ending_y)
 
     (starting_y..ending_y).each do |y|
       draw_dot(x, y, value)
@@ -14,7 +16,9 @@ class BitmapEditor
   end
 
   def draw_horizontal_line(y, starting_x, ending_x, value)
-    return unless validate_pixels_out_of_range(starting_x, ending_x, y, y)
+    y, starting_x, ending_x = y.to_i, starting_x.to_i, ending_x.to_i
+    return false unless bitmap
+    return false unless validate_pixels_out_of_range(starting_x, ending_x, y, y)
 
     (starting_x..ending_x).each do |x|
       draw_dot(x, y, value)
@@ -22,16 +26,27 @@ class BitmapEditor
   end
 
   def draw_dot(x, y, value)
-    bitmap.draw_pixel(x, y, value)
+    x, y = x.to_i, y.to_i
+    return false unless bitmap
+    return false unless validate_pixels_out_of_range(x, x, y, y)
+
+    bitmap.draw_pixel(x.to_i, y.to_i, value)
   end
 
   def display_bitmap
-    puts bitmap.to_s
+    if bitmap
+      puts bitmap.to_s
+    else
+      false
+    end
   end
 
   def terminate
     puts 'Good bye!'
     exit
+  end
+
+  def reset
   end
 
   private
@@ -60,5 +75,4 @@ class BitmapEditor
   def y_is_out_of_range?(starting_y, ending_y)
     [starting_y, ending_y].any? { |y| y <= 0 || y > bitmap.height }
   end
-
 end
