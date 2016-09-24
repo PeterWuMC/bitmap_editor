@@ -61,4 +61,26 @@ X X X
       end
     end
   end
+
+  describe '#display_bitmap' do
+    subject { described_instance.display_bitmap }
+
+    it 'prints the bitmap to stdout' do
+      expect { subject }.to output("0 0 0\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n").to_stdout
+    end
+  end
+
+  describe '#terminate' do
+    subject { described_instance.terminate }
+    before { allow(described_instance).to receive(:exit) }
+
+    it 'prints Good bye!' do
+      expect { subject }.to output("Good bye!\n").to_stdout
+    end
+
+    it 'exit application' do
+      expect(described_instance).to receive(:exit)
+      ignore_stdout { subject }
+    end
+  end
 end

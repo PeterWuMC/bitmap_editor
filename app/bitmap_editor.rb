@@ -25,6 +25,15 @@ class BitmapEditor
     bitmap.draw_pixel(x, y, value)
   end
 
+  def display_bitmap
+    puts bitmap.to_s
+  end
+
+  def terminate
+    puts 'Good bye!'
+    exit
+  end
+
   private
 
   def bitmap
