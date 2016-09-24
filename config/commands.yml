@@ -1,0 +1,29 @@
+---
+I:
+  regex:       !ruby/regexp /^I\s([0-9]+)\s([0-9]+)$/
+  method:      :new_bitmap
+  description: 'I M N - Create a new M x N image with all pixels coloured white (O).'
+C:
+  regex:       !ruby/regexp /^C$/
+  method:      :reset
+  description: 'C - Clears the table, setting all pixels to white (O).'
+L:
+  regex:       !ruby/regexp /^L\s([0-9]+)\s([0-9]+)\s([a-zA-Z])$/
+  method:      :draw_dot
+  description: 'L X Y C - Colours the pixel (X,Y) with colour C.'
+V:
+  regex:       !ruby/regexp /^V\s([0-9]+)\s([0-9]+)\s([0-9]+)\s([a-zA-Z])$/
+  method:      :draw_vertical_line
+  description: 'V X Y1 Y2 C - Draw a vertical segment of colour C in column X between rows Y1 and Y2 (inclusive).'
+H:
+  regex:       !ruby/regexp /^V\s([0-9]+)\s([0-9]+)\s([0-9]+)\s([a-zA-Z])$/
+  method:      :draw_horizontal_line
+  description: 'H X1 X2 Y C - Draw a horizontal segment of colour C in row Y between columns X1 and X2 (inclusive).'
+S:
+  regex:       !ruby/regexp /^S$/
+  method:      :display_bitmap
+  description: 'S - Show the contents of the current image'
+X:
+  regex:       !ruby/regexp /^S$/
+  method:      :terminate
+  description: 'X - Terminate the session'

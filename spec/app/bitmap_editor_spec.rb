@@ -3,8 +3,10 @@ require 'bitmap_editor'
 describe BitmapEditor do
   let(:width)              { 3 }
   let(:height)             { 5 }
-  let(:described_instance) { described_class.new(width, height) }
+  let(:described_instance) { described_class.new }
   let(:bitmap)             { described_instance.send(:bitmap) }
+
+  before { described_instance.new_bitmap(width, height) }
 
   describe '#draw_vertical_line' do
     let(:x)          { 2 }
