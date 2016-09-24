@@ -13,7 +13,7 @@ class Bitmap
     end.join("\n")
   end
 
-  def set_pixel(x, y, value)
+  def draw_pixel(x, y, value)
     matrix[y - 1][x - 1] = value
   end
 
