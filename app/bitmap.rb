@@ -1,8 +1,10 @@
 class Bitmap
-  attr_reader :matrix
+  attr_reader :matrix, :width, :height
 
   def initialize(width, height)
-    @matrix = Array.new(height) { Array.new(width) {0} }
+    @width  = width
+    @height = height
+    reset
   end
 
   def to_s
@@ -13,5 +15,9 @@ class Bitmap
 
   def set_pixel(x, y, value)
     matrix[y - 1][x - 1] = value
+  end
+
+  def reset
+    @matrix = Array.new(height) { Array.new(width) {0} }
   end
 end
