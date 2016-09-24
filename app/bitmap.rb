@@ -17,6 +17,12 @@ class Bitmap
     matrix[y - 1][x - 1] = value
   end
 
+  def draw_vertical_line(x, starting_y, ending_y, value)
+    (starting_y..ending_y).each do |y|
+      draw_pixel(x, y, value)
+    end
+  end
+
   def reset
     @matrix = Array.new(height) { Array.new(width) {0} }
   end
