@@ -24,6 +24,10 @@ class Bitmap
     matrix[y - 1][x - 1] = value
   end
 
+  def reset
+    @matrix = nil
+  end
+
   private
 
   def matrix

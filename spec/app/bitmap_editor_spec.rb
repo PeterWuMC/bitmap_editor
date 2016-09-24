@@ -20,6 +20,23 @@ describe BitmapEditor do
     end
   end
 
+  describe '#reset' do
+    before { described_instance.draw_dot(1, 1, 'X') }
+    subject { described_instance.reset }
+
+    it_behaves_like :bitmap_not_initialize
+
+    it 'reset all the pixel in the bitmap to 0' do
+        expect{ subject }.to change { bitmap.to_s }.to """
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+  """.strip
+    end
+  end
+
   describe '#draw_dot' do
     let(:x) { 2 }
     let(:y) { 2 }

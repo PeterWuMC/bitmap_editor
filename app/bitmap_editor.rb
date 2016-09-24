@@ -34,11 +34,8 @@ class BitmapEditor
   end
 
   def display_bitmap
-    if bitmap
-      puts bitmap.to_s
-    else
-      false
-    end
+    return false unless bitmap
+    puts bitmap.to_s
   end
 
   def terminate
@@ -47,6 +44,8 @@ class BitmapEditor
   end
 
   def reset
+    return false unless bitmap
+    bitmap.reset
   end
 
   private
