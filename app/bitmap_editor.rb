@@ -10,9 +10,9 @@ class BitmapEditor
   end
 
   def draw_vertical_line(x, starting_y, ending_y, value)
-    x = x.to_i
+    x          = x.to_i
     starting_y = starting_y.to_i
-    ending_y = ending_y.to_i
+    ending_y   = ending_y.to_i
     return false unless bitmap
     return false unless validate_pixels_out_of_range(x, x, starting_y, ending_y)
 
@@ -21,10 +21,10 @@ class BitmapEditor
     end
   end
 
-  def draw_horizontal_line(y, starting_x, ending_x, value)
-    y = y.to_i
+  def draw_horizontal_line(starting_x, ending_x, y, value)
+    y          = y.to_i
     starting_x = starting_x.to_i
-    ending_x = ending_x.to_i
+    ending_x   = ending_x.to_i
     return false unless bitmap
     return false unless validate_pixels_out_of_range(starting_x, ending_x, y, y)
 

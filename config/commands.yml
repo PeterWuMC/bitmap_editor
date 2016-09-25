@@ -16,7 +16,7 @@ V:
   method:      :draw_vertical_line
   description: 'V X Y1 Y2 C - Draw a vertical segment of colour C in column X between rows Y1 and Y2 (inclusive).'
 H:
-  regex:       !ruby/regexp /^V\s([0-9]+)\s([0-9]+)\s([0-9]+)\s([a-zA-Z])$/
+  regex:       !ruby/regexp /^H\s([0-9]+)\s([0-9]+)\s([0-9]+)\s([a-zA-Z])$/
   method:      :draw_horizontal_line
   description: 'H X1 X2 Y C - Draw a horizontal segment of colour C in row Y between columns X1 and X2 (inclusive).'
 S:

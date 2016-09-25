@@ -112,7 +112,7 @@ describe BitmapEditor do
     let(:y)          { 4 }
 
     subject do
-      described_instance.draw_horizontal_line(y, starting_x, ending_x, 'X')
+      described_instance.draw_horizontal_line(starting_x, ending_x, y, 'X')
     end
 
     context 'when the any of the specified pixel is out of range' do
