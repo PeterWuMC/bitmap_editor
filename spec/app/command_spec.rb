@@ -1,9 +1,11 @@
+# frozen_string_literal: true
 require 'command'
 require 'bitmap_editor'
 
 describe Command do
-
-  before { stub_const("#{described_class}::COMMANDS_MAPPING", dummy_commands_mapping) }
+  before do
+    stub_const("#{described_class}::COMMANDS_MAPPING", dummy_commands_mapping)
+  end
 
   describe '.execute' do
     let(:bitmap_editor) { BitmapEditor.new }
@@ -15,13 +17,16 @@ describe Command do
       end
 
       it 'prints the error message' do
-        expect { subject }.to output("Not enough information to execute the command I: (?-mix:^I\\s([0-9]+)\\s([0-9]+)$)\n").to_stdout
+        expect { subject }.to output(
+          'Not enough information to execute the command I: ' \
+            "(?-mix:^I\\s([0-9]+)\\s([0-9]+)$)\n"
+        ).to_stdout
       end
     end
 
     let(:method)      { :new_bitmap }
     let(:regex)       { /^I\s([0-9]+)\s([0-9]+)$/ }
-    let(:description) { 'hello world'}
+    let(:description) { 'hello world' }
     let(:dummy_commands_mapping) do
       {
         'I' => {
@@ -32,10 +37,10 @@ describe Command do
       }
     end
 
-    subject { described_class.execute(command_string, bitmap_editor) }
+    subject { described_class.new(command_string, bitmap_editor).execute }
 
     context 'when the command is not found' do
-        let(:command_string) { 'Z' }
+      let(:command_string) { 'Z' }
 
       it 'prints the error message' do
         expect { subject }.to output("Unknown Command 'Z'\n").to_stdout
@@ -70,13 +75,15 @@ describe Command do
 
       it 'calls the method in bitmap with the matching regex' do
         expect(bitmap_editor).to receive(method)
-        described_class.execute('I', bitmap_editor)
+        described_class.new('I', bitmap_editor).execute
       end
     end
 
     context 'when the command is "?"' do
       it 'prints all the descriptions in the commands_mapping' do
-        expect { described_class.execute('?', bitmap_editor) }.to output("hello world\n").to_stdout
+        expect { described_class.new('?', bitmap_editor).execute }.to output(
+          "hello world\n"
+        ).to_stdout
       end
     end
   end
