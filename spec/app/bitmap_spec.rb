@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'bitmap'
 
 describe Bitmap do
@@ -6,14 +7,15 @@ describe Bitmap do
   let(:described_instance) { described_class.new(width, height) }
 
   describe '.new' do
-    it 'initializes a 2D array with the given height and width, and default value is 0 (White)' do
-      expect(described_instance.to_s).to eq """
+    it 'initializes a 2D array with the given height and width, ' \
+      ' and default value is 0 (White)' do
+      expect(described_instance.to_s).to eq '
 0 0 0
 0 0 0
 0 0 0
 0 0 0
 0 0 0
-""".strip
+'.strip
     end
   end
 
@@ -59,13 +61,13 @@ describe Bitmap do
     it 'update one pixel in the bitmap with a provided value' do
       described_instance.draw_pixel(1, 2, 'X')
 
-      expect(described_instance.to_s).to eq """
+      expect(described_instance.to_s).to eq '
 0 0 0
 X 0 0
 0 0 0
 0 0 0
 0 0 0
-""".strip
+'.strip
     end
   end
 end

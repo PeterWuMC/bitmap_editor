@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 
 ruby '2.3.1'
@@ -7,6 +8,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec', require: false
+  gem 'rspec',       require: false
   gem 'guard-rspec', require: false
+  gem 'rubocop',     require: false
 end

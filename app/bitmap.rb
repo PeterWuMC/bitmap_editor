@@ -1,3 +1,9 @@
+# frozen_string_literal: true
+
+###
+# This class responsible for the storage of the bitmap,
+# with basic setter and validation
+###
 class Bitmap
   attr_reader :width, :height
 
@@ -31,10 +37,12 @@ class Bitmap
   private
 
   def matrix
-    @matrix ||= Array.new(height) { Array.new(width) {0} }
+    @matrix ||= Array.new(height) { Array.new(width) { 0 } }
   end
 
   def validate_width_and_height
-    return "Width(#{width}) and Height(#{height}) has to be greater than ZERO" unless width > 0 && height > 0
+    return if width.positive? && height.positive?
+
+    "Width(#{width}) and Height(#{height}) has to be greater than ZERO"
   end
 end
